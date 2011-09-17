@@ -28,9 +28,9 @@ $(function() {
 	$("#jquery_jplayer_1").jPlayer({
 		ready: function () {
 			$(this).jPlayer("setMedia", {
-				// mp3: "http://folkradio.dk:8000/teststream.mp3"
-				mp3: "http://mp3-vr-128.as34763.net:80/;stream/1",
-				ogg: "http://ogg2.as34763.net/vr160.ogg"
+				mp3: "test.folkradio.dk:8000/folkradio-256k.mp3"
+				// mp3: "http://mp3-vr-128.as34763.net:80/;stream/1",
+				// ogg: "http://ogg2.as34763.net/vr160.ogg"
 			});
 		},
 		swfPath: "/flash",
