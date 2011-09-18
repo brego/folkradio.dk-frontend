@@ -53,19 +53,20 @@ var PlayerInterface = {
 			log('PlayerInterface: player is stopped, activating');
 
 			this.indicator_on();
-			Player.play(function() {
-				PlayerInterface.volume.fadeIn();
+			this.button_play.hide();
+			Player.play(function(event) {
+				// PlayerInterface.volume.fadeIn();
 				PlayerInterface.indicator_off();
-				PlayerInterface.button_stop.fadeIn(200);
+				PlayerInterface.button_stop.show();
 			});
 		} else if (Player.state == 'playing') {
 			log('PlayerInterface: player is playing, stopping');
 
-			this.indicator_on();
+			// this.indicator_on();
 			Player.stop(function() {
-				PlayerInterface.volume.fadeOut();
-				PlayerInterface.indicator_off();
-				PlayerInterface.button_play.fadeIn(200);
+				// PlayerInterface.volume.fadeOut();
+				PlayerInterface.button_stop.hide();
+				PlayerInterface.button_play.show();
 			});
 		}
 	},
@@ -114,21 +115,13 @@ var PlayerInterface = {
 	},
 
 	indicator_on: function() {
-		console.log('PlayerInterface: toggling indicator on');
-
-		if (this.button_stop.is(':visible')) {
-			this.button_stop.fadeOut(150, function() {
-				PlayerInterface.button.addClass('loader');
-			});
-		} else {
-			this.button_play.fadeOut(150, function() {
-				PlayerInterface.button.addClass('loader');
-			});
-		}
+		log('PlayerInterface: toggling indicator on');
+		
+		this.button.addClass('loader');
 	},
 
 	indicator_off: function() {
-		console.log('PlayerInterface: toggling indicator off');
+		log('PlayerInterface: toggling indicator off');
 
 		this.button.removeClass('loader');
 	}

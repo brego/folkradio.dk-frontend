@@ -6,24 +6,46 @@
  **/
 
 var Player = {
-	state: null,
+	state:              null,
+	container:          null,
 
-	init: function() {
-		console.log('Player initiated');
+	init: function(container, media) {
+		log('Player initiated');
+		this.container = $(container);
+		
+		this.container.jPlayer({
+			ready: function() {
+				Player.container.jPlayer('setMedia', media)
+			},
+			swfPath: "/flash",
+			supplied: "mp3",
+			solution: 'html, flash',
+			volume: 0.5
+		});
+		
+		
 		return false;
 	},
 
 	play: function(callback) {
-		console.log('Player.play() called');
-		setTimeout(function() { Player.state = 'playing'; return callback(); }, 1500);
+		log('Player.play() called');
+		Player.state = 'playing';
+		
+		this.container.bind($.jPlayer.event.playing, function(event) {
+			callback(event);
+		});
+		this.container.jPlayer('play');
 	},
 
 	stop: function(callback) {
-		console.log('Player.stop() called');
-		setTimeout(function() { Player.state = 'stopped'; return callback(); }, 1500);
+		log('Player.stop() called');
+		Player.state = 'stopped';
+		
+		this.container.jPlayer('stop');
+		callback();
 	},
 
-	change_volume: function(value) {
-
+	volume: function(value) {
+		this.container.jPlayer('volume', value);
 	}
 };
