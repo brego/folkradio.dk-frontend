@@ -54,6 +54,9 @@ $(function() {
 	});
 	
 	
+	
+	
+	
 /*	$("#player").jPlayer({
 			ready: function () {
 				log(this.element);

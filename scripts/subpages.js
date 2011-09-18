@@ -49,20 +49,20 @@ var Subpages = {
 		this.overlay.show();
 		this.subpages.show();
 		
-		$('#subpage-'+name.substr(1)).add(this.close).fadeIn(300);
+		$('#subpage-'+name.substr(1)).add(this.close).add(this.overlay).fadeIn(250);
 		this.visible = true;
 	},
 
 	change: function(name) {
 		log('Subpages: change');
 		
-		$('article:visible', this.subpages).add(this.close).fadeOut(200, function() {
-			$('#subpage-'+name.substr(1)).add(Subpages.close).fadeIn(200);
+		$('article:visible', this.subpages).add(this.close).fadeOut(150, function() {
+			$('#subpage-'+name.substr(1)).add(Subpages.close).fadeIn(150);
 		});
 	},
 
 	hide: function() {
-		$('article:visible', this.subpages).add(this.close).fadeOut(300, function() {
+		$('article:visible', this.subpages).add(this.close).add(this.overlay).fadeOut(250, function() {
 			Subpages.subpages.hide();
 			Subpages.overlay.hide();
 			Subpages.close.hide();
