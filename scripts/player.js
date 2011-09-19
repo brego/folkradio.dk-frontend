@@ -17,7 +17,7 @@ var Player = {
 			ready: function() {
 				Player.container.jPlayer('setMedia', media)
 			},
-			swfPath: "/flash",
+			swfPath: "/frontend/flash",
 			supplied: "mp3",
 			solution: 'html, flash',
 			volume: 0.5
