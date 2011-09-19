@@ -26,7 +26,7 @@ var Player = {
 			},
 			swfPath: "/frontend/flash/player.swf",
 			supplied: "mp3",
-			solution: "html, flash",
+			solution: "flash, html",
 			volume: 0.5,
 			preload:  "auto",
 			wmode:    "window"

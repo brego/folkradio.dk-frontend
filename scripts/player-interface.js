@@ -6,13 +6,13 @@
  **/
 
 var PlayerInterface = {
-	button:      null,
-	button_play: null,
-	button_stop: null,
-	volume:      null,
+	button:        null,
+	button_play:   null,
+	button_stop:   null,
+	volume:        null,
 	current_track: null,
-	cover_area:  null,
-	cover_cache: [],
+	cover_area:    null,
+	cover_cache:   [],
 
 	init: function() {
 		log('PlayerInterface initiated');
