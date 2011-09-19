@@ -18,7 +18,7 @@ var Player = {
 			ready: function(event) {
 				Player.container.jPlayer('setMedia', media)
 				
-				if (event.html.used) { 
+				if (event.jPlayer.html.used) { 
 					Player.solution = 'html';
 				} else {
 					Player.solution = 'flash';
