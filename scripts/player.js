@@ -6,16 +6,23 @@
  **/
 
 var Player = {
-	state:              null,
-	container:          null,
+	state:     null,
+	container: null,
+	solution:  null,   
 
 	init: function(container, media) {
 		log('Player initiated');
 		this.container = $(container);
 		
 		this.container.jPlayer({
-			ready: function() {
+			ready: function(event) {
 				Player.container.jPlayer('setMedia', media)
+				
+				if (event.html.used) { 
+					Player.solution = 'html';
+				} else {
+					Player.solution = 'flash';
+				}
 			},
 			swfPath: "/frontend/flash/player.swf",
 			supplied: "mp3",
@@ -32,10 +39,17 @@ var Player = {
 	play: function(callback) {
 		log('Player.play() called');
 		Player.state = 'playing';
-		
-		this.container.bind($.jPlayer.event.playing, function(event) {
-			callback(event);
-		});
+
+		if (this.solution === 'html') {
+			this.container.bind($.jPlayer.event.playing, function(event) {
+				callback(event);
+			});
+		} else if (this.solution === 'flash') {
+			this.container.bind($.jPlayer.event.play, function(event) {
+				callback(event);
+			});
+		}
+
 		this.container.jPlayer('play');
 	},
 
