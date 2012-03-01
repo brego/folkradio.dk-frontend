@@ -16,7 +16,7 @@ var PlayerInterface = {
 
 	init: function() {
 		log('PlayerInterface initiated');
-		
+
 		$.getJSON('now_playing.php', function(data) {
 			log('PlayerInterface: Initialising query in '+data.time_left+'sec');
 			setTimeout(PlayerInterface.query_current_track, data.time_left*1000);
@@ -29,7 +29,7 @@ var PlayerInterface = {
 		this.volume        = $('#volume');
 		this.current_track = $('#current-track');
 		this.cover_area    = $('#cover-area');
-		
+
 		// Adding the current cover into the cache
 		current_cover    = this.cover_area.children('img');
 		current_cover_id = current_cover.attr('id').substr(6,1)
@@ -37,7 +37,7 @@ var PlayerInterface = {
 
 		// Getting the current track
 		this.query_current_track();
-		
+
 		this.button.click(function() { PlayerInterface.button_controll(); return false; });
 	},
 	
@@ -77,49 +77,50 @@ var PlayerInterface = {
 	volume_controll: function() {},
 	
 	set_title: function(artist, track_name) {
-		document.title = artist+' - '+track_name+' - FolkRadio.dk';
+		document.title = artist + ' - ' + track_name + ' - FolkRadio.dk';
 	},
 
 	load_cover: function(cover_id, album) {
 		if (this.cover_cache[cover_id] == undefined) {
 			log('PlayerInterface: Loading cover for '+album);
-			
+
 			new_cover                  = document.createElement('img');
-			new_cover.src              = 'covers/'+cover_id+'.jpg';
-			new_cover.id               = 'cover-'+cover_id;
+			new_cover.src              = 'covers/' + cover_id + '.jpg';
+			new_cover.id               = 'cover-' + cover_id;
 			new_cover.alt              = album;
 			new_cover.title            = album;
 			new_cover.style.opacity    = 0;
-			
+
 			this.cover_cache[cover_id] = $(new_cover);
 		}
 	},
 
 	track_change: function(artist, track_name, album, cover_id) {
 		log('PlayerInterface: changing track to '+track_name);
-		
+
 		this.load_cover(cover_id, album);
 
-		this.current_track.add(this.cover_area.children('img')).animate({opacity: 0}, 300, function() {
-			
-			// Changing the label
-			PlayerInterface.current_track.text(artist+' - '+track_name);
-			
-			// Changing the page title
-			PlayerInterface.set_title(artist, track_name);
+		if (this.current_track.text() != (artist + ' - ' + track_name)) {
+			this.current_track.add(this.cover_area.children('img')).animate({opacity: 0}, 300, function() {
+				// Changing the label
+				PlayerInterface.current_track.text(artist + ' - ' + track_name);
 
-			// Empty the cover_area and add the new cover
-			PlayerInterface.cover_area.empty();
-			PlayerInterface.cover_area.append(PlayerInterface.cover_cache[cover_id]);
+				// Changing the page title
+				PlayerInterface.set_title(artist, track_name);
+
+				// Empty the cover_area and add the new cover
+				PlayerInterface.cover_area.empty();
+				PlayerInterface.cover_area.append(PlayerInterface.cover_cache[cover_id]);
 	
-			PlayerInterface.current_track.add('#cover-'+cover_id).animate({opacity: 1}, 300);
-		});
+				PlayerInterface.current_track.add('#cover-' + cover_id).animate({opacity: 1}, 300);
+			});
+		}
 
 	},
 
 	indicator_on: function() {
 		log('PlayerInterface: toggling indicator on');
-		
+
 		this.button.addClass('loader');
 	},
 

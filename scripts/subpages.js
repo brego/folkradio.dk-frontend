@@ -24,7 +24,7 @@ var Subpages = {
 			Subpages.overlay.height($(window).height());
 			Subpages.overlay.width($(window).width());
 		});
-		
+
 		$(window).hashchange(function() {
 			hash = location.hash;
 			if (hash !== '' && hash !== '#radio') {
@@ -33,7 +33,7 @@ var Subpages = {
 				if (Subpages.visible) {
 					Subpages.change(hash);
 				} else {
-					Subpages.show(hash);				
+					Subpages.show(hash);
 				}
 			} else if (hash == '#radio') {
 				Subpages.hide();
@@ -48,14 +48,14 @@ var Subpages = {
 
 		this.overlay.show();
 		this.subpages.show();
-		
+
 		$('#subpage-'+name.substr(1)).add(this.close).add(this.overlay).fadeIn(250);
 		this.visible = true;
 	},
 
 	change: function(name) {
 		log('Subpages: change');
-		
+
 		$('article:visible', this.subpages).add(this.close).fadeOut(150, function() {
 			$('#subpage-'+name.substr(1)).add(Subpages.close).fadeIn(150);
 		});

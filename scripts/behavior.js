@@ -18,7 +18,6 @@ window.log = function() {
 };
 
 $(function() {
-	
 	Player.init('#jquery_jplayer_1', {mp3: "http://test.folkradio.dk:8000/folkradio-256k.mp3"});
 	PlayerInterface.init();
 	Subpages.init();

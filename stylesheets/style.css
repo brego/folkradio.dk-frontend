@@ -355,6 +355,18 @@ footer {
 	background-color: #efedd9;
 	margin: 0 auto 10px auto;
 	border: 1px solid #ddddd1;
+	-webkit-border-radius: 4px;
+	-khtml-border-radius:  4px;
+	-moz-border-radius:    4px;
+	-ms-border-radius:     4px;
+	-o-border-radius:      4px;
+	border-radius:         4px;
+	-webkit-box-shadow: 1px 1px 0px rgba(0, 0, 0, .04), inset 1px 1px 0 rgba(255, 255, 255, .55);
+	-khtml-box-shadow:  1px 1px 0px rgba(0, 0, 0, .04), inset 1px 1px 0 rgba(255, 255, 255, .55);
+	-moz-box-shadow:    1px 1px 0px rgba(0, 0, 0, .04), inset 1px 1px 0 rgba(255, 255, 255, .55);
+	-ms-box-shadow:     1px 1px 0px rgba(0, 0, 0, .04), inset 1px 1px 0 rgba(255, 255, 255, .55);
+	-o-box-shadow:      1px 1px 0px rgba(0, 0, 0, .04), inset 1px 1px 0 rgba(255, 255, 255, .55);
+	box-shadow:         1px 1px 0px rgba(0, 0, 0, .04), inset 1px 1px 0 rgba(255, 255, 255, .55);
 }
 
 #button {
@@ -363,10 +375,19 @@ footer {
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	cursor: pointer;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, .75);
 }
-
+	#button:active {
+		-webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.02), 1px 1px 0 rgba(255, 255, 255, 0.65);
+		-khtml-box-shadow:  inset 1px 1px 0 rgba(0,0,0,.02), 1px 1px 0 rgba(255, 255, 255, 0.65);
+		-moz-box-shadow:    inset 1px 1px 0 rgba(0,0,0,.02), 1px 1px 0 rgba(255, 255, 255, 0.65);
+		-ms-box-shadow:     inset 1px 1px 0 rgba(0,0,0,.02), 1px 1px 0 rgba(255, 255, 255, 0.65);
+		-o-box-shadow:      inset 1px 1px 0 rgba(0,0,0,.02), 1px 1px 0 rgba(255, 255, 255, 0.65);
+		box-shadow:         inset 1px 1px 0 rgba(0,0,0,.02), 1px 1px 0 rgba(255, 255, 255, 0.65);
+	}
 	#button:hover {
 		background-color: #ebe5d3;
+		text-shadow: 1px 1px 0 rgba(255, 255, 255, .45);
 	}
 
 	#button a {
