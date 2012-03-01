@@ -1,22 +1,27 @@
 <?php
+require('/usr/share/php-getid3/getid3.php');
 
-header('Content-Type: application/json; charset=utf-8');
+header('Content-Type: application/json');
 
-$random_time = rand(20, 40);
-$tracks      = array();
+$getID3 = new getID3;
 
-$tracks[] = array('artist' => 'Trio Mio', 'track' => 'Bryllupsvals til Mari og Johnny', 'album' => 'Stories Around A Holy Goat', 'cover_id' => 1, 'time_left' => $random_time);
-$tracks[] = array('artist' => 'Trio Mio', 'track' => 'Etna/Philostratus revenge', 'album' => 'Stories Around A Holy Goat', 'cover_id' => 1, 'time_left' => $random_time);
-$tracks[] = array('artist' => 'Trio Mio', 'track' => 'Øresundsmarsch', 'album' => 'Stories Around A Holy Goat', 'cover_id' => 1, 'time_left' => $random_time);
+// get latest filename
 
-$tracks[] = array('artist' => 'Tumult', 'track' => 'Kærlighedstræet', 'album' => 'Aldrig Får Jeg Fred', 'cover_id' => 2, 'time_left' => $random_time);
-$tracks[] = array('artist' => 'Tumult', 'track' => 'Jeg Går Ud Og Jeg Går Ind', 'album' => 'Aldrig Får Jeg Fred', 'cover_id' => 2, 'time_left' => $random_time);
-$tracks[] = array('artist' => 'Tumult', 'track' => 'Norrsken', 'album' => 'Aldrig Får Jeg Fred', 'cover_id' => 2, 'time_left' => $random_time);
+$conn = mysql_connect('localhost', 'liquidsoap', '3x4Tqwtap3LM4mc8');
+mysql_select_db('folkradio');
+$q = mysql_query("SELECT filename FROM plays ORDER BY id DESC LIMIT 1");
 
-$tracks[] = array('artist' => 'Kætter Kvartet', 'track' => 'Var Det Det Det Var', 'album' => 'Den sidste Schottish ', 'cover_id' => 3, 'time_left' => $random_time);
-$tracks[] = array('artist' => 'Kætter Kvartet', 'track' => 'Wha\'m no\'e glæ\'e', 'album' => 'Den sidste Schottish ', 'cover_id' => 3, 'time_left' => $random_time);
-$tracks[] = array('artist' => 'Kætter Kvartet', 'track' => 'Hegnhopperen', 'album' => 'Den sidste Schottish ', 'cover_id' => 3, 'time_left' => $random_time);
+$filename = mysql_result($q, 0, 0);
 
-print json_encode($tracks[array_rand($tracks)]);
+$fileinfo = $getID3->analyze($filename);
+
+$jsoninfo = array(	'artist' => utf8_encode($fileinfo['tags']['id3v2']['artist'][0]), 
+			'track' => utf8_encode($fileinfo['tags']['id3v2']['title'][0]), 
+			'album' => utf8_encode($fileinfo['tags']['id3v2']['album'][0]), 
+			'cover_id' => 2, 
+			'time_left' => 10);
+
+print json_encode($jsoninfo);
 
 ?>
+

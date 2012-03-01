@@ -34,6 +34,9 @@ var PlayerInterface = {
 		current_cover    = this.cover_area.children('img');
 		current_cover_id = current_cover.attr('id').substr(6,1)
 		this.cover_cache[current_cover_id] = current_cover;
+
+		// Getting the current track
+		this.query_current_track();
 		
 		this.button.click(function() { PlayerInterface.button_controll(); return false; });
 	},
