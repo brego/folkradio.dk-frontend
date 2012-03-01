@@ -1,5 +1,6 @@
 <?php
 require('/usr/share/php-getid3/getid3.php');
+require('./dbconf.php');
 
 header('Content-Type: application/json');
 
@@ -7,8 +8,8 @@ $getID3 = new getID3;
 
 // get latest filename
 
-$conn = mysql_connect('localhost', 'liquidsoap', '3x4Tqwtap3LM4mc8');
-mysql_select_db('folkradio');
+$conn = mysql_connect($dbconf['host'], $dbconf['user'], $dbconf['pass']);
+mysql_select_db($dbconf['base']);
 $q = mysql_query("SELECT filename FROM plays ORDER BY id DESC LIMIT 1");
 
 $filename = mysql_result($q, 0, 0);
